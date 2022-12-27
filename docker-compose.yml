@@ -1,0 +1,79 @@
+version: "3.7"
+services:
+  hash_translator_app_db:
+    image: mongo:latest
+    container_name: "hash_translator_app_db"
+    restart: on-failure
+    networks:
+      - "backend"
+    ports:
+      - "27018:27017"
+    volumes:
+      - ./data/logs/mongodb:/data/db
+
+  hash-translator-app:
+    image: artk0921/hash-translator-service:latest
+    container_name: "hash-translator-app"
+    restart: on-failure
+    networks:
+      - "backend"
+    ports:
+      - "8082:8082"
+    environment:
+      AUTHENTICATION_SERVICE_DOMAIN: http://authentication-app:8081
+      PATH_TO_LOG_FILE: /var/log/hash_translator_app.log
+    volumes:
+      - ./data/logs/app/hash_translator_app:/var/log/hash_translator_app.log
+    depends_on:
+      - hash_translator_app_db
+      - authentication-app
+
+  authentication_app_db:
+    image: postgres:12
+    container_name: "authentication_app_db"
+    restart: on-failure
+    user: root
+    networks:
+      - "backend"
+    ports:
+      - "5416:5432"
+    environment:
+      POSTGRES_PASSWORD: admin
+      POSTGRES_USER: postgres
+      POSTGRES_DB: authentication_app_db
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - ./data/logs/postgresql:/var/lib/postgresql/data
+
+  authentication-app:
+    image: artk0921/authentication-service:latest
+    container_name: "authentication-app"
+    restart: on-failure
+    networks:
+      - "backend"
+    ports:
+      - "8081:8081"
+    environment:
+      PATH_TO_LOG_FILE: /var/log/authentication_app.log
+    volumes:
+      - ./data/logs/app/authentication_app:/var/log/authentication_app.log
+    depends_on:
+      - authentication_app_db
+
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    container_name: swagger-ui
+    restart: on-failure
+    networks:
+      - "backend"
+    ports:
+      - "8089:8080"
+    environment:
+      SWAGGER_JSON: doc/swagger.json
+    volumes:
+      - ./doc:/usr/share/nginx/html/doc
+
+networks:
+  backend:
+    driver: bridge
+

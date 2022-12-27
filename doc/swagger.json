@@ -1,0 +1,60 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Hash-translator-app",
+    "description": "Api for decoding hash.",
+    "version": "0.0.1"
+  },
+  "paths": {
+    "/api/applications/": {
+      "get": {
+        "description": "get application by id",
+        "responses": {
+          "200": {
+            "description": "Successfully get application by id"
+          },
+          "404": {
+            "description": "Application with this id not found"
+          }
+        }
+      },
+      "post": {
+        "description": "create application",
+        "responses": {
+          "202": {
+            "description": "Successfully async processing"
+          },
+          "400": {
+            "description": "Permission denied"
+          }
+        }
+      }
+    },
+    "/api/v1/authentication-service/sign-up": {
+      "post": {
+        "description": "sign up",
+        "responses": {
+          "200": {
+            "description": "Registration was successful"
+          },
+          "400": {
+            "description": "Permission denied"
+          }
+        }
+      }
+    },
+    "/api/v1/authentication-service/sign-up/authorized/validate-user": {
+      "get": {
+        "description": "check if user enter right creds",
+        "responses": {
+          "200": {
+            "description": "Successfully"
+          },
+          "400": {
+            "description": "Permission denied"
+          }
+        }
+      }
+    }
+  }
+}
