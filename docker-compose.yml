@@ -8,8 +8,8 @@ services:
       - "backend"
     ports:
       - "27018:27017"
-    volumes:
-      - ./data/logs/mongodb:/data/db
+    #volumes:
+    #  - ./data/logs/mongodb:/data/db
 
   hash-translator-app:
     image: artk0921/hash-translator-service:latest
@@ -42,8 +42,8 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_DB: authentication_app_db
       POSTGRES_HOST_AUTH_METHOD: trust
-    volumes:
-      - ./data/logs/postgresql:/var/lib/postgresql/data
+    #volumes:
+    #  - ./data/logs/postgresql:/var/lib/postgresql/data
 
   authentication-app:
     image: artk0921/authentication-service:latest
