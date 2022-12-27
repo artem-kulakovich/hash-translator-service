@@ -223,12 +223,12 @@
 							"basic": [
 								{
 									"key": "password",
-									"value": "useruser",
+									"value": "admin",
 									"type": "string"
 								},
 								{
 									"key": "username",
-									"value": "user@mail.ru",
+									"value": "admin@mail.ru",
 									"type": "string"
 								}
 							]
@@ -236,7 +236,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8082/api/applications/63aa425e649e2104c668dd65",
+							"raw": "http://localhost:8082/api/applications/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -245,7 +245,7 @@
 							"path": [
 								"api",
 								"applications",
-								"63aa425e649e2104c668dd65"
+								"1"
 							],
 							"query": [
 								{
