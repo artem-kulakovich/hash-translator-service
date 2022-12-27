@@ -1,7 +1,5 @@
 package by.bntu.fitr.hashtranslatorservice.constant;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public interface CommonConstant {
     String APPLICATION_NEW_STATUS = "New";
@@ -11,5 +9,4 @@ public interface CommonConstant {
     String EMPTY = "";
     String CONTENT_TYPE_HEADER_NAME  = "Content-Type";
     String AUTHORIZATION_HEADER_NAME = "Authorization";
-     List<String> test = new ArrayList<>();
 }
